@@ -1,13 +1,22 @@
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var path = require('path');
+
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/index.jsx',
+    context: path.resolve(__dirname, './'),
+    devtool: 'none',
     output: {
-        path: __dirname + '/public',
-        publicPath: '/public/',
+        path: path.resolve(__dirname, './build'),
+        //publicPath: '/',
         filename: 'bundle.js'
     },
-    devServer: {
-        contentBase: './public'
-    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: 'ReactJS lessons',
+            template: 'public/index.html'
+        })
+    ],
+    
     module: {
         rules: [
             {
