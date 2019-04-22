@@ -1,56 +1,41 @@
 import React from 'react';
-import axios from 'axios';
 import Picture from '../components/content/Picture';
 import Title from '../components/content/Title';
 import Year from '../components/content/Year';
 import Genre from '../components/content/Genre';
 
 
-
-
-// const Content = () => (
-//     <div className="content">
-//         <div className="film-item">
-//             <Picture imgSrc="" />
-//             <Title filmTitle="title" />
-//             <Year filmYear="1988" />
-//             <Genre filmGenre="Fiction" />
-//         </div>
-//     </div>
-// );
-
 class Content extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            filmsData: [],
-        }
-    }
-    
-    componentDidMount() {
-        axios.get('https://reactjs-cdp.herokuapp.com/movies')
-        .then(response => {
-            this.setState({ filmsData: response.data.data });
-        })
-        .catch(error => {
-            console.error(error);
-        });
-    }
-
     render() {
-        const { filmsData } = this.state;
+        const filmsData = this.props.filmsData;
         return (
-        <div className="content">
-                {filmsData.map(item => (
-                    <div className="film-item" key={ item.id } >
-                        <Picture imgSrc={ item.poster_path } />
-                        <Title filmTitle={ item.title } />
-                        <Year filmYear={ item.release_date } />
-                        <Genre filmGenre={ item.genres } />
-                    </div>
-                ))}
-        </div>);
+            <div className="content">
+                { filmsData.map(item => (
+                    <Film {...item} handleClick={ this.props.setFilmId }/>
+                )) }
+            </div>
+        );
     }
+}
+
+// const Content = () => {
+//     const filmsData = this.props.filmsData;
+//     <div className="content">
+//         { filmsData.map(item => (
+//             <Film {...item} handleClick={ this.props.setFilmId }/>
+//         )) }
+//     </div>
+// }
+
+const Film = ({ id, poster_path, title, release_date, genres, handleClick }) => {
+    return (
+        <div className="film-item" key={ id } onClick={ () => handleClick(id) }>
+            <Picture imgSrc={ poster_path } />
+            <Title filmTitle={ title } />
+            <Year filmYear={ release_date } />
+            <Genre filmGenre={ genres } />
+        </div>
+    );
 }
 
 export default Content;

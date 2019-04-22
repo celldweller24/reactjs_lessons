@@ -1,57 +1,47 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import HeaderSearch from "./containers/HeaderSearch";
-import HeaderDetail from "./containers/HeaderDetail";
+import axios from 'axios';
+import Header from './components/header/Header';
 import Filter from './components/header/Filter';
 import Content from "./containers/Content";
 import Footer from "./containers/Footer";
 
 import './main.scss';
 
-// class ClassComponent extends React.Component {
-//     render() {
-//         return <h1>{this.props.name}</h1>;
-//     }
-// }
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            filmsData: [],
+            filmId: null,
+        }
+    }
 
-// class PureComponent extends React.PureComponent {
-//     render() {
-//         return <h1>React.PureComponent</h1>;
-//     }
-// }
+    componentDidMount() {
+        axios.get('https://reactjs-cdp.herokuapp.com/movies')
+        .then(response => {
+            this.setState({ filmsData: response.data.data });
+            console.log(response);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }
 
-// const FunctionComponent = (props) => <h1>{props.name}</h1>;
-
-// class CreateElement extends React.Component {
-//     render() {
-//       return React.createElement('h1', { className: this.props.className }, this.props.name);
-//     }
-// }
-
-// const Http = new XMLHttpRequest();
-// const url='https://reactjs-cdp.herokuapp.com/movies';
-// Http.open("GET", url);
-// Http.send();
-// Http.onreadystatechange = (e) => {
-//     console.log(Http.responseText);
-// }
-
-function Header(props) {
-    const isDetail = props.isDetail;
-    console.log(props);
-    return (isDetail) ? <HeaderDetail /> : <HeaderSearch /> ;
+    getFilmId(id) {
+        this.setState({ filmId: id });
+    }
+    
+    render() {
+        return (
+            <div>
+                <Header filmId={ this.state.filmId }/>
+                <Filter quantityFilmsFound="7"/>
+                <Content filmsData={ this.state.filmsData } setFilmId={ this.getFilmId.bind(this) }/>
+                <Footer />
+            </div>
+        )
+    } 
 }
-
-
-const App = () => (<div>
-    {/* <ClassComponent name='React.Componentsss' />
-    <PureComponent />
-    <FunctionComponent name='funccct'/>
-    <CreateElement name='Ololo' className='cellse'/> */}
-    <Header isDetail={(window.location.pathname === '/') ? false : true} />
-    <Filter quantityFilmsFound="7"/>
-    <Content />
-    <Footer />
-</div>)
 
 ReactDOM.render(<App />, document.getElementById("app"));

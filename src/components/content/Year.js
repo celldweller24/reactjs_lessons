@@ -1,7 +1,9 @@
 import React from 'react';
 
-const Year = ({filmYear}) => (
-    <p className="film-item__year">{filmYear}</p>
-);
+const Year = ({filmYear}) => {
+    return (
+        <p className="film-item__year">{ new Date(filmYear).getFullYear() }</p>
+    );
+}
 
 export default Year;

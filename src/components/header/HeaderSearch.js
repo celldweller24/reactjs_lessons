@@ -1,5 +1,5 @@
 import React from 'react';
-import Search from "../components/header/Search";
+import Search from "./Search";
 
 
 const HeaderSearch = () => (
