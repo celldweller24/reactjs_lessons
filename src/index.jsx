@@ -21,7 +21,6 @@ class App extends React.Component {
         axios.get('https://reactjs-cdp.herokuapp.com/movies')
         .then(response => {
             this.setState({ filmsData: response.data.data });
-            console.log(response);
         })
         .catch(error => {
             console.error(error);
