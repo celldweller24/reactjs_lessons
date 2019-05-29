@@ -31,22 +31,22 @@ module.exports = {
         })
     ],
     
-    optimization: {
-        minimizer: NODE_ENV == 'production' ? [new UglifyJsPlugin({
-            parallel: true,
-            uglifyOptions: {
-                warnings: false,
-                parse: {},
-                compress: {
-                    inline: true
-                },
-                mangle: true, // Note `mangle.properties` is `false` by default.
-                toplevel: true,
-                keep_fnames: true,
-            },
-            sourceMap: true
-        })] : false
-    },
+    // optimization: {
+    //     minimizer: NODE_ENV == 'production' ? [new UglifyJsPlugin({
+    //         parallel: true,
+    //         uglifyOptions: {
+    //             warnings: false,
+    //             parse: {},
+    //             compress: {
+    //                 inline: true
+    //             },
+    //             mangle: true, // Note `mangle.properties` is `false` by default.
+    //             toplevel: true,
+    //             keep_fnames: true,
+    //         },
+    //         sourceMap: true
+    //     })] : false
+    // },
 
     module: {
         rules: [

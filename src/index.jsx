@@ -5,8 +5,12 @@ import Header from './components/header/Header';
 import Filter from './components/header/Filter';
 import Content from "./containers/Content";
 import Footer from "./containers/Footer";
-
 import './main.scss';
+import { Provider } from 'react-redux';
+import { createStore } from "redux";
+import { filterReducer } from './components/store/reducers';
+
+const store = createStore(filterReducer);
 
 class App extends React.Component {
     constructor(props) {
@@ -33,12 +37,14 @@ class App extends React.Component {
     
     render() {
         return (
-            <div>
-                <Header filmId={ this.state.filmId }/>
-                <Filter quantityFilmsFound="7"/>
-                <Content filmsData={ this.state.filmsData } setFilmId={ this.getFilmId.bind(this) }/>
-                <Footer />
-            </div>
+            <Provider store={ store }>
+                <div>
+                    <Header filmId={ this.state.filmId }/>
+                    <Filter quantityFilmsFound="7"/>
+                    <Content filmsData={ this.state.filmsData } setFilmId={ this.getFilmId.bind(this) }/>
+                    <Footer />
+                </div>
+            </Provider>
         )
     } 
 }
