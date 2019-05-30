@@ -34,8 +34,10 @@ class Filter extends React.Component {
     }
 }
 
-const mapStateToProps = () => {
-    return {};
+const mapStateToProps = (state) => {
+    return {
+        
+    };
 }
 
 const mapDispatchToProps =  {

@@ -1,52 +1,44 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import axios from 'axios';
-import Header from './components/header/Header';
-import Filter from './components/header/Filter';
-import Content from "./containers/Content";
-import Footer from "./containers/Footer";
 import './main.scss';
 import { Provider } from 'react-redux';
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { filterReducer } from './components/store/reducers';
+import IndexContainer from "./containers/IndexContainer";
+import thunk from "redux-thunk";
 
-const store = createStore(filterReducer);
+const store = createStore(filterReducer, applyMiddleware(thunk));
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            filmsData: [],
-            filmId: null,
-        }
-    }
+// class App extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             filmsData: [],
+//             filmId: null,
+//         }
+//     }
 
-    componentDidMount() {
-        axios.get('https://reactjs-cdp.herokuapp.com/movies')
-        .then(response => {
-            this.setState({ filmsData: response.data.data });
-        })
-        .catch(error => {
-            console.error(error);
-        });
-    }
+//     render() {
+//         return (
+//             <Provider store={ store }>
+//                 <div>
+//                     <Header filmId={ this.state.filmId }/>
+//                     <Filter quantityFilmsFound="7"/>
+//                     <Content filmsData={ this.state.filmsData } setFilmId={ this.getFilmId.bind(this) }/>
+//                     <Footer />
+//                 </div>
+                
+//             </Provider>
+//         )
+//     } 
+// }
 
-    getFilmId(id) {
-        this.setState({ filmId: id });
-    }
-    
-    render() {
-        return (
-            <Provider store={ store }>
-                <div>
-                    <Header filmId={ this.state.filmId }/>
-                    <Filter quantityFilmsFound="7"/>
-                    <Content filmsData={ this.state.filmsData } setFilmId={ this.getFilmId.bind(this) }/>
-                    <Footer />
-                </div>
-            </Provider>
-        )
-    } 
+const App = () => {
+    return (
+        <Provider store={ store }>
+            <IndexContainer />
+        </Provider>
+    );
 }
 
 ReactDOM.render(<App />, document.getElementById("app"));
