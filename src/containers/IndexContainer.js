@@ -28,19 +28,23 @@ class IndexContainer extends React.Component {
         //fetchData();
         this.props.fetchData();
     }
-
+// should be a action in future u will set filmId into router
     getFilmId(id) {
         this.setState({ filmId: id });
     }
 
     render() {
+        if (this.props.loading) {
+            return <div>loading</div>
+        }
+        
         return (
             <div>
                 { console.log(this.props.filmsData) }
-                {/* <Header filmId={ this.state.filmId }/>
+                <Header filmId={ this.props.filmId }/>
                 <Filter quantityFilmsFound="7"/>
-                <Content filmsData={ this.state.filmsData } setFilmId={ this.getFilmId.bind(this) }/>
-                <Footer /> */}
+                <Content filmsData={ this.props.filmsData } setFilmId={ this.getFilmId.bind(this) }/>
+                <Footer />
             </div>
         )
     }
@@ -48,7 +52,9 @@ class IndexContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-         filmsData: state,
+         filmsData: state.filmsData,
+         filmId: state.currentFilmId,
+         loading: state.loading,
          //filmId: state.filmId
     };
 }

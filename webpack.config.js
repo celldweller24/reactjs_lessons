@@ -17,6 +17,11 @@ module.exports = {
     devtool: NODE_ENV == 'development' ? 'module-source-map' : false,
     watch: NODE_ENV == 'development',
     mode: 'none',
+    devServer: {
+        contentBase: path.join(__dirname, 'build'),
+        compress: false,
+        port: 9000
+      },
 
     plugins: [
         new HtmlWebpackPlugin({
