@@ -1,21 +1,21 @@
-import { FILTER_BY_DATE, FILTER_BY_RAITING, FETCH_SEARCH_RESULTS_START, FETCH_SEARCH_RESULTS_SUCCESS, FETCH_SEARCH_RESULTS_ERROR } from './actions';
-
-const compareDate = (filmA, filmB) => {
-    return filmA.release_date - filmB.release_date;
-};
-
-const compareRaiting = (filmA, filmB) => {
-    return filmA.vote_average - filmB.vote_average;
-};
+import { 
+    FILTER_BY_DATE, 
+    FILTER_BY_RAITING, 
+    FETCH_SEARCH_RESULTS_START, 
+    FETCH_SEARCH_RESULTS_SUCCESS, 
+    FETCH_SEARCH_RESULTS_ERROR, 
+    SET_CURRENT_FILM_ID,
+    FETCH_CURRENT_MOVIE,
+    FILTER_BY_TITLE } from './actions';
 
 const initialState = {
     filmsData: [],
     currentFilmId: {},
-    loading: true,
+    currentMovie: {},
+    loading: true
 }
 
-export const filterReducer = (state = initialState, action) => {
-    console.log(state);
+export const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_SEARCH_RESULTS_START:
             return {
@@ -34,9 +34,35 @@ export const filterReducer = (state = initialState, action) => {
                 loading: false,
             }
         case FILTER_BY_DATE:
-            return [...state].sort(compareDate);
+            return {
+                ...state,
+                loading: false,
+                filmsData: action.payload,
+            }
         case FILTER_BY_RAITING:
-            return state.sort(compareRaiting);
+            return {
+                ...state,
+                loading: false,
+                filmsData: action.payload,
+            }
+        case SET_CURRENT_FILM_ID:
+            return {
+                ...state,
+                loading: false,
+                currentFilmId: action.payload,
+            }
+        case FETCH_CURRENT_MOVIE:
+            return {
+                ...state,
+                loading: false,
+                currentMovie: action.payload.data,
+            }
+        case FILTER_BY_TITLE:
+            return {
+                ...state,
+                loading: false,
+                filmsData: action.payload, 
+            }
     }
     return state;
 };

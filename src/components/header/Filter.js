@@ -16,17 +16,16 @@ import { sortByDate, sortByRaiting } from '../store/actions';
 class Filter extends React.Component {
     constructor(props) {
         super(props);
-
     }
 
     render() {
         return (
             <div className="filter">
-                <p className="filter__found"><span> </span> Movies found</p>
+                <p className="filter__found"><span>{ this.props.quantityFilmsFound }</span> Movies found</p>
                 <div className="filter__sortby">
                     <p>Sort by</p>
-                    <p onClick={ () => this.props.sortByDate() }>release date</p>
-                    <p onClick={ () => this.props.sortByRaiting() }>raiting</p>
+                    <p onClick={ () => this.props.sortByDate(this.props.filmsData) }>release date</p>
+                    <p onClick={ () => this.props.sortByRaiting(this.props.filmsData) }>raiting</p>
                 </div>
             </div>
         )
@@ -36,7 +35,7 @@ class Filter extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        
+        filmsData: state.filmsData
     };
 }
 

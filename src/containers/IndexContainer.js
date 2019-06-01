@@ -3,7 +3,7 @@ import Header from '../components/header/Header';
 import Filter from '../components/header/Filter';
 import Content from "./Content";
 import Footer from "./Footer";
-import { fetchData, sortByDate, sortByRaiting } from '../components/store/actions';
+import { fetchData, getFilmId } from '../components/store/actions';
 import { connect } from 'react-redux';
 
 
@@ -29,9 +29,9 @@ class IndexContainer extends React.Component {
         this.props.fetchData();
     }
 // should be a action in future u will set filmId into router
-    getFilmId(id) {
-        this.setState({ filmId: id });
-    }
+    // getFilmId(id) {
+    //     this.setState({ filmId: id });
+    // }
 
     render() {
         if (this.props.loading) {
@@ -40,10 +40,9 @@ class IndexContainer extends React.Component {
         
         return (
             <div>
-                { console.log(this.props.filmsData) }
                 <Header filmId={ this.props.filmId }/>
-                <Filter quantityFilmsFound="7"/>
-                <Content filmsData={ this.props.filmsData } setFilmId={ this.getFilmId.bind(this) }/>
+                <Filter quantityFilmsFound={ this.props.filmsData.length }/>
+                <Content filmsData={ this.props.filmsData } setFilmId={ this.props.getFilmId.bind(this) }/>
                 <Footer />
             </div>
         )
@@ -52,15 +51,15 @@ class IndexContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-         filmsData: state.filmsData,
-         filmId: state.currentFilmId,
-         loading: state.loading,
-         //filmId: state.filmId
+        filmsData: state.filmsData,
+        filmId: state.currentFilmId,
+        loading: state.loading,
     };
 }
 
 const mapDispatchToProps =  {
-    fetchData  
+    fetchData,
+    getFilmId
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IndexContainer);

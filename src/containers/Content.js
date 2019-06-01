@@ -11,21 +11,12 @@ class Content extends React.Component {
         return (
             <div className="content">
                 { filmsData.map(item => (
-                    <Film {...item} handleClick={ this.props.setFilmId }/>
+                    <Film {...item} handleClick={ this.props.setFilmId } />
                 )) }
             </div>
         );
     }
 }
-
-// const Content = () => {
-//     const filmsData = this.props.filmsData;
-//     <div className="content">
-//         { filmsData.map(item => (
-//             <Film {...item} handleClick={ this.props.setFilmId }/>
-//         )) }
-//     </div>
-// }
 
 const Film = ({ id, poster_path, title, release_date, genres, handleClick }) => {
     return (

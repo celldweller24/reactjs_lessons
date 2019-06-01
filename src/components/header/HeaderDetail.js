@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import Button from './Button';
 import Picture from '../content/Picture';
 import Title from '../content/Title';
@@ -7,43 +6,49 @@ import Year from '../content/Year';
 import Genre from '../content/Genre';
 import Overview from './Overview';
 import Runtime from './Runtime';
+import { fetchCurrentMovie } from '../store/actions';
+import { connect } from 'react-redux';
+import Search from './Search';
 
 
 class HeaderDetail extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            filmData: {},
-        }
-    }
-    
-    componentDidMount() {
-        axios.get('https://reactjs-cdp.herokuapp.com/movies/' + this.props.filmId)
-        .then(response => {
-            this.setState({ filmData: response.data });
-            //console.log(this.state.filmData);
-        })
-        .catch(error => {
-            console.error(error);
-        });
     }
 
     render() {
+        this.props.fetchCurrentMovie(this.props.currentFilmId);
+        const currentMovie = this.props.currentMovie;
         return (
             <header>
-                <h2>Netflixroulete</h2>
-                <Button buttonName="Search" className="header-detail__button-search" />
-                <div className="detail-film">
-                    <Picture imgSrc={ this.state.filmData.poster_path } />
-                    <Title filmTitle={ this.state.filmData.title } />
-                    <Year filmYear={ String(this.state.filmData.release_date) } />
-                    <Genre filmGenre={ this.state.filmData.genres } />
-                    <Runtime filmRuntime={ this.state.filmData.runtime } />
-                    <Overview filmOverwiev={ this.state.filmData.overview } />
-                </div>
+                <div className="header-detail-wrapper">
+                    <h2>Netflixroulete</h2>
+                    <Button buttonName="Search" className="header-detail__button-search" />
+                    <div className="detail-film">
+                        <Picture imgSrc={ currentMovie.poster_path } />
+                        <div className="detail-film__description">
+                            <Title filmTitle={ currentMovie.title } />
+                            <Year filmYear={ String(currentMovie.release_date) } />
+                            <Genre filmGenre={ currentMovie.genres } />
+                            <Runtime filmRuntime={ currentMovie.runtime } />
+                            <Overview filmOverwiev={ currentMovie.overview } />
+                        </div>
+                    </div>
+                </div>    
             </header>
         );
     }
 }
 
-export default HeaderDetail;
+const mapStateToProps = state => {
+    return {
+        currentFilmId: state.currentFilmId,
+        currentMovie: state.currentMovie
+    };
+}
+
+const mapDispatchToProps =  {
+    fetchCurrentMovie
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderDetail);

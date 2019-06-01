@@ -51,6 +51,43 @@ body {
                 }
             }
         }
+        .header-detail-wrapper {
+            h2 {
+                float: left;
+                overflow: hidden;
+            }
+            .header-detail__button-search {
+                float: right;
+                margin: 10px 40px;
+            }
+            .detail-film {
+                clear: both;
+                padding: 30px 120px;
+                overflow: hidden;
+                .film-item__picture {
+                    width: 300px;
+                    float: left;
+                    margin: 0;
+                    img {
+                        width: 100%;
+                        height: auto;
+                    }
+                }
+                .detail-film__description {
+                    color: #fff;
+                    float: left;
+                    overflow: hidden;
+                    width: 385px;
+                    margin-left: 35px;
+                    .film-item__film-title {
+                        color: #F85163;
+                        font-size: 23px;
+                        font-weight: bold;
+                        margin: 0;
+                    }
+                }
+            }
+        }
     }
     .filter {
         padding: 5px 0px;

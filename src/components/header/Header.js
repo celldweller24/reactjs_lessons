@@ -2,8 +2,8 @@ import React from 'react';
 import HeaderDetail from './HeaderDetail';
 import HeaderSearch from './HeaderSearch';
 
-const Header = (movieId = {}) => {
-    return (movieId.filmId) ? <HeaderDetail filmId={ movieId.filmId } /> : <HeaderSearch />;
+const Header = ({filmId}) => {
+    return (typeof filmId == 'number') ? <HeaderDetail movieId={ filmId } /> : <HeaderSearch />;
 }
 
 export default Header;
