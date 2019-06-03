@@ -8,7 +8,7 @@ import Overview from './Overview';
 import Runtime from './Runtime';
 import { fetchCurrentMovie } from '../store/actions';
 import { connect } from 'react-redux';
-import Search from './Search';
+import { Link } from 'react-router-dom';
 
 
 class HeaderDetail extends React.Component {
@@ -22,8 +22,12 @@ class HeaderDetail extends React.Component {
         return (
             <header>
                 <div className="header-detail-wrapper">
-                    <h2>Netflixroulete</h2>
-                    <Button buttonName="Search" className="header-detail__button-search" />
+                    <Link to="/">
+                        <h2>Netflixroulete</h2>
+                    </Link>
+                    <Link to="/">
+                        <Button buttonName="Search" className="header-detail__button-search" />
+                    </Link>
                     <div className="detail-film">
                         <Picture imgSrc={ currentMovie.poster_path } />
                         <div className="detail-film__description">

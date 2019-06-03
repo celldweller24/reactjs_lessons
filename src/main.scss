@@ -107,7 +107,7 @@ body {
             p {
                 display: inline-block;
                 margin: 0px 20px;
-                cursor: pointer;
+                cursor: pointer !important;
                 &:first-child {
                     font-size: 17px;
                     cursor: default;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { sortByDate, sortByRaiting } from '../store/actions';
+import { Link } from 'react-router-dom';
 
 // const Filter = ({quantityFilmsFound}) => (
 //     <div className="filter">
@@ -24,8 +25,12 @@ class Filter extends React.Component {
                 <p className="filter__found"><span>{ this.props.quantityFilmsFound }</span> Movies found</p>
                 <div className="filter__sortby">
                     <p>Sort by</p>
-                    <p onClick={ () => this.props.sortByDate(this.props.filmsData) }>release date</p>
-                    <p onClick={ () => this.props.sortByRaiting(this.props.filmsData) }>raiting</p>
+                    <Link to="/sort_by_date">
+                        <p onClick={ () => this.props.sortByDate(this.props.filmsData) }>release date</p>
+                    </Link>
+                    <Link to="/sort_by_raiting">
+                        <p onClick={ () => this.props.sortByRaiting(this.props.filmsData) }>raiting</p>
+                    </Link>
                 </div>
             </div>
         )

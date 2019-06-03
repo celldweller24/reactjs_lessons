@@ -3,6 +3,7 @@ import Picture from '../components/content/Picture';
 import Title from '../components/content/Title';
 import Year from '../components/content/Year';
 import Genre from '../components/content/Genre';
+import { Link } from 'react-router-dom';
 
 
 class Content extends React.Component {
@@ -20,12 +21,14 @@ class Content extends React.Component {
 
 const Film = ({ id, poster_path, title, release_date, genres, handleClick }) => {
     return (
-        <div className="film-item" key={ id } onClick={ () => handleClick(id) }>
-            <Picture imgSrc={ poster_path } />
-            <Title filmTitle={ title } />
-            <Year filmYear={ release_date } />
-            <Genre filmGenre={ genres } />
-        </div>
+        <Link to={ `/film/${ id }` }>
+            <div className="film-item" key={ id } onClick={ () => handleClick(id) }>
+                <Picture imgSrc={ poster_path } />
+                <Title filmTitle={ title } />
+                <Year filmYear={ release_date } />
+                <Genre filmGenre={ genres } />
+            </div>
+        </Link>
     );
 }
 
