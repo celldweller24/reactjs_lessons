@@ -1,6 +1,5 @@
 import { 
-    FILTER_BY_DATE, 
-    FILTER_BY_RAITING, 
+    SET_SONRTING, 
     FETCH_SEARCH_RESULTS_START, 
     FETCH_SEARCH_RESULTS_SUCCESS, 
     FETCH_SEARCH_RESULTS_ERROR, 
@@ -12,6 +11,7 @@ const initialState = {
     filmsData: [],
     currentFilmId: {},
     currentMovie: {},
+    sortValue: 'release',
     loading: true
 }
 
@@ -33,17 +33,11 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
             }
-        case FILTER_BY_DATE:
+        case SET_SONRTING:
             return {
                 ...state,
                 loading: false,
-                filmsData: action.payload,
-            }
-        case FILTER_BY_RAITING:
-            return {
-                ...state,
-                loading: false,
-                filmsData: action.payload,
+                sortValue: action.payload,
             }
         case SET_CURRENT_FILM_ID:
             return {
@@ -61,7 +55,9 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                filmsData: action.payload, 
+                filmsData: state.filmsData.filter(item => {
+                            return item.title.toLowerCase().indexOf(action.payload.toLowerCase()) >= 0
+                        })    
             }
     }
     return state;

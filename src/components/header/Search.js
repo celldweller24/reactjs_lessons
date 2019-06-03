@@ -18,7 +18,7 @@ import { filterByTitle, fetchData } from '../store/actions';
 // export default Search;
 
 
-const Search = ({ searchTitle, filterByTitle, fetchData }) => (
+const Search = ({ searchTitle, filterByTitle }) => (
     <div className="search-block">
         <p className="search-block__title">{ searchTitle }</p>
         <form className="search-form">
@@ -36,8 +36,7 @@ const Search = ({ searchTitle, filterByTitle, fetchData }) => (
 )
 
 const mapDispatchToProps =  {
-    filterByTitle,
-    fetchData
+    filterByTitle
 }
 
 export default connect(null, mapDispatchToProps)(Search);

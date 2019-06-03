@@ -42,7 +42,7 @@ class IndexContainer extends React.Component {
             <div>
                 <Header filmId={ this.props.filmId }/>
                 <Filter quantityFilmsFound={ this.props.filmsData.length }/>
-                <Content filmsData={ this.props.filmsData } setFilmId={ this.props.getFilmId.bind(this) }/>
+                <Content setFilmId={ this.props.getFilmId.bind(this) }/>
                 <Footer />
             </div>
         )

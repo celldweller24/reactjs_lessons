@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sortByDate, sortByRaiting } from '../store/actions';
+import { setSorting } from '../store/actions';
 
-// const Filter = ({quantityFilmsFound}) => (
+// const Filter = ({ quantityFilmsFound }) => (
 //     <div className="filter">
-//         <p className="filter__found"><span>{quantityFilmsFound}</span> Movies found</p>
+//         <p className="filter__found"><span>{ quantityFilmsFound }</span> Movies found</p>
 //         <div className="filter__sortby">
 //             <p>Sort by</p>
-//             <p onClick={ () => props.sortByDate() }>release date</p>
-//             <p onClick={ () =>  props.sortByRaiting() }>raiting</p>
+//             <p onClick={ () => setSorting('release') }>release date</p>
+//             <p onClick={ () => setSorting('raiting') }>raiting</p>
 //         </div>
 //     </div>
 // );
@@ -24,8 +24,8 @@ class Filter extends React.Component {
                 <p className="filter__found"><span>{ this.props.quantityFilmsFound }</span> Movies found</p>
                 <div className="filter__sortby">
                     <p>Sort by</p>
-                    <p onClick={ () => this.props.sortByDate(this.props.filmsData) }>release date</p>
-                    <p onClick={ () => this.props.sortByRaiting(this.props.filmsData) }>raiting</p>
+                    <p onClick={ () => this.props.setSorting('release') }>release date</p>
+                    <p onClick={ () => this.props.setSorting('raiting') }>raiting</p>
                 </div>
             </div>
         )
@@ -33,15 +33,8 @@ class Filter extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        filmsData: state.filmsData
-    };
-}
-
 const mapDispatchToProps =  {
-    sortByDate,
-    sortByRaiting   
+    setSorting
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default connect(null, mapDispatchToProps)(Filter);
