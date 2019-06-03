@@ -11,7 +11,7 @@ class Content extends React.Component {
         return (
             <div className="content">
                 { filmsData.map(item => (
-                    <Film {...item} handleClick={ this.props.setFilmId } />
+                    <Film key={ item.id } {...item} handleClick={ this.props.setFilmId } />
                 )) }
             </div>
         );
@@ -20,7 +20,7 @@ class Content extends React.Component {
 
 const Film = ({ id, poster_path, title, release_date, genres, handleClick }) => {
     return (
-        <div className="film-item" key={ id } onClick={ () => handleClick(id) }>
+        <div className="film-item" onClick={ () => handleClick(id) }>
             <Picture imgSrc={ poster_path } />
             <Title filmTitle={ title } />
             <Year filmYear={ release_date } />

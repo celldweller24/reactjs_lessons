@@ -18,40 +18,26 @@ import { filterByTitle, fetchData } from '../store/actions';
 // export default Search;
 
 
-class Search extends React.Component {
-    constructor(props) {
-        super(props);
-        this.onSearch = this.onSearch.bind(this);
-    }
-
-    onSearch(event) {
-        this.props.filterByTitle(this.props.filmsData, event.target.value);
-    }
-
-    render() {
-        return (
-            <div className="search-block">
-                <p className="search-block__title">{ this.props.searchTitle }</p>
-                <form className="search-form">
-                    <input type="input" name="search" className="search-form__input" onChange={ this.onSearch }></input>
-                    <Button buttonName="Title" className="search-form__button search-form__button_title" />
-                    <Button buttonName="Genre" className="search-form__button search-form__button_genre" />
-                    <Button buttonName="Search" className="search-form__button search-form__button_search" />
-                </form>
-            </div>
-        );
-    }
-}
-
-const mapStateToProps = state => {
-    return {
-        filmsData: state.filmsData,
-    };
-}
+const Search = ({ searchTitle, filterByTitle, fetchData }) => (
+    <div className="search-block">
+        <p className="search-block__title">{ searchTitle }</p>
+        <form className="search-form">
+            <input
+                type="input"
+                name="search"
+                className="search-form__input"
+                onChange={ ev => filterByTitle(ev.target.value) }
+            />
+            <Button buttonName="Title" className="search-form__button search-form__button_title" />
+            <Button buttonName="Genre" className="search-form__button search-form__button_genre" />
+            <Button buttonName="Search" className="search-form__button search-form__button_search" />
+        </form>
+    </div>
+)
 
 const mapDispatchToProps =  {
     filterByTitle,
     fetchData
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(null, mapDispatchToProps)(Search);
