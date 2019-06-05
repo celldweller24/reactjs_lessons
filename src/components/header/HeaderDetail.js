@@ -18,6 +18,7 @@ class HeaderDetail extends React.Component {
 
     render() {
         const currentFilmId =  this.props.match.params.id;
+        // Side effects must be in life cycles methods
         this.props.fetchCurrentMovie(currentFilmId);
         const currentMovie = this.props.currentMovie;
         return (
