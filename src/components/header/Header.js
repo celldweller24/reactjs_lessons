@@ -7,22 +7,22 @@ import { Route } from 'react-router-dom';
 //     return (typeof filmId == 'number') ? <HeaderDetail movieId={ filmId } /> : <HeaderSearch />;
 // }
 
-class Header extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+// class Header extends React.Component {
+//     constructor(props) {
+//         super(props);
+//     }
 
-    render() {
-        return (
-            <div>
-                <Route path={ `/film/${ this.props.filmId }` } render={ () => (
-                    <HeaderDetail movieId={this.props.filmId } /> 
-                )} />
+//     render() {
+//         return (
+//             <div>
+//                 <Route path={ `/film/${ this.props.filmId }` } render={ () => (
+//                     <HeaderDetail movieId={this.props.filmId } /> 
+//                 )} />
 
-                <Route path="/" component={HeaderSearch}/>
-            </div>
-        )
-    }
-}
+//                 <Route path="/" component={HeaderSearch}/>
+//             </div>
+//         )
+//     }
+// }
 
 export default Header;

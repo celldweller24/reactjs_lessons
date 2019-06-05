@@ -8,16 +8,17 @@ import Overview from './Overview';
 import Runtime from './Runtime';
 import { fetchCurrentMovie } from '../store/actions';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 
 class HeaderDetail extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     render() {
-        this.props.fetchCurrentMovie(this.props.currentFilmId);
+        const currentFilmId =  this.props.match.params.id;
+        this.props.fetchCurrentMovie(currentFilmId);
         const currentMovie = this.props.currentMovie;
         return (
             <header>
@@ -46,7 +47,6 @@ class HeaderDetail extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        currentFilmId: state.currentFilmId,
         currentMovie: state.currentMovie
     };
 }
@@ -55,4 +55,6 @@ const mapDispatchToProps =  {
     fetchCurrentMovie
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderDetail);
+export default withRouter (
+    connect(mapStateToProps, mapDispatchToProps)(HeaderDetail)
+);

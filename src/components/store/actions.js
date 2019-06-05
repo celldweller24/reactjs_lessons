@@ -1,6 +1,5 @@
 import axios from 'axios';
-export const FILTER_BY_DATE = 'FILTER_BY_DATE';
-export const FILTER_BY_RAITING = 'FILTER_BY_RAITING';
+export const SET_SONRTING = 'SET_SONRTING';
 export const FILTER_BY_TITLE = 'FILTER_BY_TITLE';
 export const FETCH_SEARCH_RESULTS_START = 'FETCH_SEARCH_RESULTS_START';
 export const FETCH_SEARCH_RESULTS_SUCCESS = 'FETCH_SEARCH_RESULTS_SUCCESS';
@@ -8,14 +7,9 @@ export const FETCH_SEARCH_RESULTS_ERROR = 'FETCH_SEARCH_RESULTS_ERROR';
 export const SET_CURRENT_FILM_ID = 'SET_CURRENT_FILM_ID';
 export const FETCH_CURRENT_MOVIE = 'FETCH_CURRENT_MOVIE';
 
-export const sortByDate = (filmsData) => ({
-    type: FILTER_BY_DATE,
-    payload: filmsData.sort(compareDate)
-});
-
-export const sortByRaiting = (filmsData) => ({
-    type: FILTER_BY_RAITING,
-    payload: filmsData.sort(compareRaiting)
+export const setSorting = (sorting) => ({
+    type: SET_SONRTING,
+    payload: sorting
 });
 
 export const getFilmId = (id) => ({
@@ -34,23 +28,18 @@ export const fetchData = () => async (dispatch) => {
     }
 };
 
+// Cycling in HeaderDetail component
 export const fetchCurrentMovie = (movieId) => async (dispatch) => {
-    const response = await axios.get('https://reactjs-cdp.herokuapp.com/movies/' + movieId);
-    dispatch({ type: FETCH_CURRENT_MOVIE, payload: { ...response } });
-    
+    try {
+        const response = await axios.get('https://reactjs-cdp.herokuapp.com/movies/' + movieId);
+        dispatch({ type: FETCH_CURRENT_MOVIE, payload: { ...response } });
+    } catch (e) {
+        console.error(e);
+        dispatch({ type: FETCH_SEARCH_RESULTS_ERROR });
+    }
 };
 
-export const filterByTitle = (filmsData, match) => ({
+export const filterByTitle = (match) => ({
     type: FILTER_BY_TITLE,
-    payload: filmsData.filter((item) => {
-        return item.title.toLowerCase().indexOf(match.toLowerCase()) >= 0
-    }),
+    payload: match
 });
-
-const compareDate = (filmA, filmB) => {
-    return new Date(filmA.release_date).getTime() - new Date(filmB.release_date).getTime();
-};
-
-const compareRaiting = (filmA, filmB) => {
-    return filmA.vote_average - filmB.vote_average;
-};
