@@ -15,7 +15,7 @@ module.exports = {
 
     context: path.resolve(__dirname, './'),
     devtool: NODE_ENV == 'development' ? 'module-source-map' : false,
-    watch: NODE_ENV == 'development',
+    watch: false,
     mode: 'none',
     devServer: {
         contentBase: path.join(__dirname, 'build'),
@@ -64,14 +64,14 @@ module.exports = {
                     loader: 'babel-loader'
                 }]
             },
-            /* {
-                test: /\.(s?)css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    "css-loader",
-                    "sass-loader",
-                ]
-            }, */
+            // {
+            //     test: /\.(s?)css$/,
+            //     use: [
+            //         MiniCssExtractPlugin.loader,
+            //         "css-loader",
+            //         "sass-loader",
+            //     ]
+            // },
             {
                 test: /\.(css|scss)$/,
                 use: [

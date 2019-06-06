@@ -17,12 +17,12 @@ class Main extends React.Component {
             return <div>loading</div>
         }
         return (
-            <div className="main-wrapper">
+            this.props.filmsData ? <div className="main-wrapper">
                 <HeaderSearch />
                 <Filter quantityFilmsFound={ this.props.filmsData.length }/>
                 <Content filmsData={ this.props.filmsData } setFilmId={ this.props.getFilmId.bind(this) }/>
                 <Footer />
-            </div>
+            </div> : <div>loading</div>
         )
     }
 }
