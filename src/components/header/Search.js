@@ -41,8 +41,6 @@ import { withRouter } from 'react-router-dom';
 
 class Search extends React.Component {
     render() {
-        console.log(this.props.location);
-        console.log(this.props.match);
         return (
             <div className="search-block">
                 <p className="search-block__title">{ this.props.searchTitle }</p>

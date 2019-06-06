@@ -21,7 +21,7 @@ module.exports = {
         contentBase: path.join(__dirname, 'build'),
         historyApiFallback: true,
         compress: false,
-        port: 9000
+        port: 3000
       },
 
     plugins: [
@@ -58,21 +58,22 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(jsx|js)$/,
                 exclude: /node_modules/,
                 use: [{
                     loader: 'babel-loader'
                 }]
             },
-            {
-                test: /\.css$/,
+            /* {
+                test: /\.(s?)css$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    "css-loader"
+                    "css-loader",
+                    "sass-loader",
                 ]
-            },
+            }, */
             {
-                test: /\.scss$/,
+                test: /\.(css|scss)$/,
                 use: [
                     'style-loader',
                     MiniCssExtractPlugin.loader,
