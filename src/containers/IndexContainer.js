@@ -2,13 +2,16 @@ import React from "react";
 import Main from './Main';
 import FilmDetail from './FilmDetail';
 import NotFound from './NotFound';
-import { BrowserRouter as Router, StaticRouter, Route, Switch } from 'react-router-dom';
+import { StaticRouter, Route, Switch } from 'react-router-dom';
 
 class IndexContainer extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render() {  
         return (
             <div>
-                <StaticRouter>
+                <StaticRouter location = { this.props.location } context={ {} }>
                     <Switch>
                         <Route exact path="/" component={Main} />
                         <Route path="/search/:id" component={Main} />

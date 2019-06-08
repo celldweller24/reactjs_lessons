@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const NODE_ENV = process.env.NODE_ENV || 'development';
+require('babel-polyfill');
 
 module.exports = {
     entry: ['babel-polyfill', './src/index.jsx'],

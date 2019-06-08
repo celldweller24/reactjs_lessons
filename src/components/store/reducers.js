@@ -8,7 +8,7 @@ import {
     FILTER_BY_TITLE } from './actions';
 
 const initialState = {
-    filmsData: [],
+    filmsData: {},
     currentFilmId: {},
     currentMovie: {},
     sortValue: 'release',
