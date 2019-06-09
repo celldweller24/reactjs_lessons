@@ -1,7 +1,7 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import HeaderDetail from './HeaderDetail';
 import HeaderSearch from './HeaderSearch';
-import { Route } from 'react-router-dom';
 
 // const Header = ({filmId}) => {
 //     return (typeof filmId == 'number') ? <HeaderDetail movieId={ filmId } /> : <HeaderSearch />;
@@ -16,7 +16,7 @@ import { Route } from 'react-router-dom';
 //         return (
 //             <div>
 //                 <Route path={ `/film/${ this.props.filmId }` } render={ () => (
-//                     <HeaderDetail movieId={this.props.filmId } /> 
+//                     <HeaderDetail movieId={this.props.filmId } />
 //                 )} />
 
 //                 <Route path="/" component={HeaderSearch}/>
